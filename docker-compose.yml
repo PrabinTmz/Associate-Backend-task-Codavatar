@@ -1,0 +1,32 @@
+services:
+  app:
+    build: .
+    env_file: .env
+    ports:
+      - 8000:8000
+    networks:
+      - app-network
+    volumes:
+      - ./app:/app
+    depends_on:
+      - postgres
+    restart: always
+    # command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+  postgres:
+    image: postgres:15
+    env_file: .env
+    networks:
+      - app-network
+    ports:
+      - 5432:5432
+    # volumes:
+      # - ./docker-volumes/user_db_data:/var/lib/postgresql/data
+
+networks:
+  app-network:
+    driver: bridge
+
+# volumes:
+#   user_db_data:
+#   product_db_data:

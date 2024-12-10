@@ -1,0 +1,57 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.db
+
+# Virtual Environments
+env/
+.venv/
+venv/
+
+# FastAPI-related
+instance/
+*.sqlite3
+*.log
+
+
+# Local settings and configurations
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test/coverage reports
+*.cover
+.coverage
+.tox/
+.nox/
+.coverage.*
+nosetests.xml
+pytest.xml
+tests/test_*.xml
+
+# Distribution/packaging
+dist/
+build/
+*.egg-info/
+
+# MacOS files (if applicable)
+.DS_Store
+
+# Logs
+*.log
+
+# JetBrains/PyCharm files
+.idea/
+
+# VS Code files
+.vscode/
+
+# Other possible files to ignore
+*.bak
+*.tmp
+
+# env files
+.env
