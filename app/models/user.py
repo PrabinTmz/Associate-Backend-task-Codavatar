@@ -1,5 +1,7 @@
 from uuid import uuid4
 
+from email_validator import validate_email as validate_email_address, EmailSyntaxError
+
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
@@ -16,3 +18,10 @@ class User(Base):
     password = Column(String)
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, onupdate=func.now())
+
+    def validate_email(self):
+        try:
+            # Validate email syntax using email_validator
+            validate_email_address(self.email)
+        except EmailSyntaxError:
+            raise ValueError("Invalid email address.")

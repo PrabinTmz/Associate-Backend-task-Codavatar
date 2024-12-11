@@ -6,19 +6,18 @@ from models.user import User
 from core.database import get_db  # Dependency for the database session
 from utils.jwt import verify_access_token
 
+from fastapi.security import OAuth2PasswordBearer
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 async def get_current_user(
-    request: Request, db: AsyncSession = Depends(get_db)
+    token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)
 ) -> User:
-    # Extract token from the Authorization header
-    token = request.headers.get("Authorization")
-    if token is None or not token.startswith("Bearer "):
+    
+    if token is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid credentials!",
         )
-
-    token = token.split(" ")[1]  # Extract only the token part
 
     # Decode the token
     payload = verify_access_token(token)

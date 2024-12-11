@@ -29,13 +29,24 @@ async def register_user(user_create: UserCreate, db: AsyncSession = Depends(get_
         )
 
     hashed_password = hash_password(user_create.password)
-    db_user = User(
+
+    user = User(
         email=user_create.email,
         password=hashed_password,
     )
-    db.add(db_user)
+
+    
+    try:
+        user.validate_email()
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, 
+            detail="Invalid email format!"
+        )
+
+    db.add(user)
     await db.commit()
-    await db.refresh(db_user)
+    await db.refresh(user)
 
     response = {"message": "User registered successfully."}
 
