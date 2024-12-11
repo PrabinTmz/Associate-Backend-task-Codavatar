@@ -1,15 +1,17 @@
 import os
-from fastapi import HTTPException
+from fastapi import HTTPException, status
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from typing import Union
 
+from core.config import settings
+
 # JWT Token expiration (default 15 minutes)
-ACCESS_TOKEN_EXPIRE_MINUTES = 30  # Can adjust as needed
+ACCESS_TOKEN_EXPIRE_MINUTES = settings.ACCESS_TOKEN_EXPIRE_MINUTES  
 
 # Secret key for JWT encoding/decoding
-SECRET_KEY = os.getenv("JWT_SECRET")
-ALGORITHM = "HS256"
+SECRET_KEY = settings.JWT_SECRET
+ALGORITHM = settings.ALGORITHM
 
 # Create JWT Token
 def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None):

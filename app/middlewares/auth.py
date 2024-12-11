@@ -1,7 +1,9 @@
-from fastapi import Request, HTTPException, FastAPI
+from fastapi import Request, HTTPException, FastAPI, status
 from starlette.middleware.base import BaseHTTPMiddleware
+
 # from jose import JWTError
 from utils.jwt import verify_access_token
+
 
 class AuthMiddleware(BaseHTTPMiddleware):
     def __init__(self, app: FastAPI, exempt_routes: list):
@@ -21,17 +23,26 @@ class AuthMiddleware(BaseHTTPMiddleware):
                 if token.startswith("Bearer "):
                     token = token[7:]  # Remove "Bearer " prefix
                 else:
-                    raise HTTPException(status_code=400, detail="Invalid token format")
-                
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        detail="Invalid token format",
+                    )
+
                 verify_access_token = verify_access_token(token)
                 if verify_access_token is None:
-                    raise HTTPException(status_code=401, detail="Invalid or expired token")
-                
+                    raise HTTPException(
+                        status_code=status.HTTP_401_UNAUTHORIZED,
+                        detail="Invalid or expired token",
+                    )
+
                 # Attach user info to request state
                 request.state.user = verify_access_token
                 response = await call_next(request)
             else:
-                raise HTTPException(status_code=401, detail="Please provide an access token!") # No authentication required for some routes
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Please provide an access token!",
+                )  # No authentication required for some routes
                 response = await call_next(request)
 
         return response

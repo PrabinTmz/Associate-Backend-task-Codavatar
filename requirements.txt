@@ -17,3 +17,7 @@ pydantic-settings==2.6.1
 python-jose==3.3.0
 bcrypt==4.2.0
 passlib==1.7.4
+
+psycopg2-binary==2.9.10
+asyncpg==0.30.0
+phonenumbers==8.13.51

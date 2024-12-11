@@ -1,10 +1,12 @@
 from uuid import uuid4
 
 from sqlalchemy import Column, String, DateTime
+from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
 
 from core.database import Base
+
 
 class User(Base):
     __tablename__ = "users"
