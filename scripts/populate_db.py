@@ -97,9 +97,9 @@ def main():
     # Generate a random number of users to populate
     url = f"{BASE_URL}/phonenumbers?limit=25&offset=55"
 
-    # populate_records(token=token, num=2000, url=url)
+    populate_records(token=token, num=2000, url=url)
 
-    get_data(token, url)
+    # get_data(token, url)
 
 
 if __name__ == "__main__":
