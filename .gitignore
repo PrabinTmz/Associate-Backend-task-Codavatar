@@ -56,3 +56,6 @@ logs/
 
 # env files
 .env
+
+# local docker volumes dir
+docker-volumes/
