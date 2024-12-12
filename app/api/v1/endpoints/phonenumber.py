@@ -62,7 +62,7 @@ async def get_phonenumbers(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
     offset: int = Query(0, alias="offset", ge=0),
-    limit: int = Query(10, le=50),
+    limit: int = Query(10, le=50, ge=1),
 ):
     """
     Retrieve all phone numbers associated with the authenticated user.
