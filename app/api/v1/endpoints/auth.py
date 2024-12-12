@@ -20,17 +20,16 @@ async def register_user(
 ):
     """
     Register a new user.
-
-    Parameters:
-    - user_create (UserCreate): The user registration details.
-    - db (AsyncSession): Database session dependency.
-
-    Returns:
-    - JSONResponse: Success message if registration is successful.
-
-    Raises:
-    - HTTPException: If the email is already registered or invalid.
     """
+    # Parameters:
+    #   - user_create (UserCreate): The user registration details.
+    #   - db (AsyncSession): Database session dependency.
+
+    # Returns:
+    #   - JSONResponse: Success message if registration is successful.
+
+    # Raises:
+    #   - HTTPException: If the email is already registered or invalid.
 
     # Check if the email is already registered
     result = await db.execute(select(User).filter(User.email == user_create.email))
@@ -75,17 +74,17 @@ async def create_token(
 ):
     """
     Handles user login by verifying credentials and issuing JWT tokens.
-
-    Args:
-        user_login (UserLogin): User credentials (email & password) provided for login.
-        db (AsyncSession): Database session dependency.
-
-    Returns:
-        JSONResponse: JWT tokens (access & refresh) if authentication is successful.
-
-    Raises:
-        HTTPException: If credentials are invalid.
     """
+    # Args:
+    #     user_login (UserLogin): User credentials (email & password) provided for login.
+    #     db (AsyncSession): Database session dependency.
+
+    # Returns:
+    #     JSONResponse: JWT tokens (access & refresh) if authentication is successful.
+
+    # Raises:
+    #     HTTPException: If credentials are invalid.
+    
     # Retrieve the user from the database by email
     result = await db.execute(select(User).filter(User.email == user_login.email))
     db_user = result.scalar_one_or_none()
@@ -111,17 +110,17 @@ async def refresh_access_token(
 ):
     """
     Handles the process of refreshing an access token using a valid refresh token.
-
-    Args:
-        token_data (TokenRefresh): Data containing the refresh token sent by the client.
-        db (AsyncSession): Database session dependency.
-
-    Returns:
-        JSONResponse: New JWT access token if refresh is valid.
-
-    Raises:
-        HTTPException: If the refresh token is invalid or expired.
     """
+    # Args:
+    #     token_data (TokenRefresh): Data containing the refresh token sent by the client.
+    #     db (AsyncSession): Database session dependency.
+
+    # Returns:
+    #     JSONResponse: New JWT access token if refresh is valid.
+
+    # Raises:
+    #     HTTPException: If the refresh token is invalid or expired.
+
     # Verify the provided refresh token asynchronously
     payload = await verify_token(token_data.refresh_token, "refresh")
 
