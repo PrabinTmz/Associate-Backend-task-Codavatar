@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Generic, TypeVar, List, Optional
-from pydantic.generics import GenericModel
+# from pydantic.generics import GenericModel
 
 T = TypeVar("T")
 
@@ -11,6 +11,6 @@ class PaginationBase(BaseModel):
     next_offset: Optional[int]
     prev_offset: Optional[int]
 
-class PaginatedResponse(GenericModel, Generic[T]):
+class PaginatedResponse(BaseModel, Generic[T]):
     data: List[T]
     pagination: PaginationBase

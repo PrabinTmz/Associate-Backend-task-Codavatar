@@ -82,10 +82,10 @@ FastAPI provides interactive API documentation:
 - ReDoc: `http://localhost:8000/redoc`
 
 
-### Endpoints
+<!-- ### Endpoints
 `/api/v1/auth/register`
 `/api/v1/auth/token`
-`/api/v1/auth/refresh`
+`/api/v1/auth/refresh` -->
 
 
 
