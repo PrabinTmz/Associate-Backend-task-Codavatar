@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Container
         run: |
-            docker run --rm myapp-image:latest /bin/bash -c "pytest"
+            docker run --rm myapp-image:latest pytest
 
 
       # - name: Run Tests
