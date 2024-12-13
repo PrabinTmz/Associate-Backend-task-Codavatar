@@ -22,7 +22,7 @@ jobs:
           python-version: '3.12'
 
       - name: Set PYTHONPATH
-        run: echo "PYTHONPATH=./app" >> $GITHUB_ENV  # Set PYTHONPATH for all subsequent steps
+        run: echo "PYTHONPATH=$(pwd)/app" >> $GITHUB_ENV  # Set PYTHONPATH for all subsequent steps
 
       - name: Install dependencies
         run: |
