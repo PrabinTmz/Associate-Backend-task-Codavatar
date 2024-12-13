@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Container
         run: |
-            docker run -it --rm myapp-image:latest
+            docker run --rm myapp-image:latest
 
       - name: Run Tests
         run: |
