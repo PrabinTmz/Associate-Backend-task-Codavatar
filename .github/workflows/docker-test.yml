@@ -23,12 +23,14 @@ jobs:
           # sudo apt-get install docker-compose
           sudo curl -L "https://github.com/docker/compose/releases/download/v2.x.x/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
+          which docker-compose
+          docker-compose --version
+
 
       # 3. Start services with docker-compose
       - name: Start services with docker-compose
         run: |
           cp .env.example .env
-          docker-compose --version
           docker-compose up -d --build
 
       # 4. Run tests
