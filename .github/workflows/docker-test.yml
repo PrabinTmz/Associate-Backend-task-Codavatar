@@ -21,7 +21,7 @@ jobs:
       - name: Install and upgdrade docker-compose
         run: |
           # sudo apt-get install docker-compose
-          sudo curl -L "https://github.com/docker/compose/releases/download/v2.x.x/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo wget -O /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/v2.x.x/docker-compose-$(uname -s)-$(uname -m)
           sudo chmod +x /usr/local/bin/docker-compose
           which docker-compose
           docker-compose --version
