@@ -39,7 +39,7 @@ ENV PATH="/home/appuser/.local/bin:$PATH"
 EXPOSE 8000
 
 # run application in reload mode for development
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"] 
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"] 
 
 #  For production, use multiple workers to handle concurrency
 # CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]

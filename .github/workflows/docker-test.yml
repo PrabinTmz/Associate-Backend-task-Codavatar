@@ -1,0 +1,44 @@
+name: Docker Compose Python Test Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Docker Compose
+      - name: Install and upgdrade docker-compose
+        run: |
+          # sudo apt-get install docker-compose
+          sudo wget -O /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/v2.x.x/docker-compose-$(uname -s)-$(uname -m)
+          sudo chmod +x /usr/local/bin/docker-compose
+          which docker-compose
+          docker-compose --version
+
+
+      # 3. Start services with docker-compose
+      - name: Start services with docker-compose
+        run: |
+          cp .env.example .env
+          docker-compose up -d --build
+
+      # 4. Run tests
+      - name: Run tests
+        run: |
+          docker-compose exec -T app pytest
+
+      # 5. Tear down services
+      - name: Stop and remove services
+        run: |
+          docker-compose down
