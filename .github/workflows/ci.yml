@@ -3,7 +3,7 @@ name: Python Test Workflow
 on:
   push:
     branches:
-      - main
+      - side
   pull_request:
     branches:
       - main
@@ -21,8 +21,8 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Set PYTHONPATH
-        run: echo "PYTHONPATH=$(pwd)/app" >> $GITHUB_ENV  # Set PYTHONPATH for all subsequent steps
+      - name: Set PYTHONPATH env variable
+        run: export "PYTHONPATH=$(pwd)/app"
 
       - name: Install dependencies
         run: |
@@ -33,9 +33,9 @@ jobs:
         run: |
           pytest  # Replace with your test runner or command
 
-      - name: Upload test results (optional)
-        if: always()  # Always execute this even if tests fail
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: ./test-results/  # Update this path if you're saving test results
+      # - name: Upload test results (optional)
+      #   if: always()  # Always execute this even if tests fail
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: test-results
+      #     path: ./test-results/  # Update this path if you're saving test results
