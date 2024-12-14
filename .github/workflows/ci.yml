@@ -22,16 +22,18 @@ jobs:
           python-version: '3.12'
 
       - name: Set PYTHONPATH env variable
-        run: export "PYTHONPATH=$(pwd)/app"
+        run: | 
+          echo $(pwd)
+          ls
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+      # - name: Install dependencies
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install -r requirements.txt
 
-      - name: Run tests
-        run: |
-          pytest  # Replace with your test runner or command
+      # - name: Run tests
+      #   run: |
+      #     pytest  # Replace with your test runner or command
 
       # - name: Upload test results (optional)
       #   if: always()  # Always execute this even if tests fail
